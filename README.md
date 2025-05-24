@@ -102,7 +102,7 @@ realpath mcpServer.js
 ```json
 {
   "mcpServers": {
-    "<server_name>": {
+    "octocat-hp-mcp-server-local": {
       "command": "<absolute_path_to_node>",
       "args": ["<absolute_path_to_mcpServer.js>"]
     }
@@ -121,7 +121,7 @@ For production deployments, you can use Docker:
 **1. Build Docker image**
 
 ```sh
-docker build -t <your_server_name> .
+docker build -t octocat-hp-mcp-server .
 ```
 
 **2. Claude Desktop Integration**
@@ -131,9 +131,9 @@ Add Docker server configuration to Claude Desktop (Settings → Developers → E
 ```json
 {
   "mcpServers": {
-    "<your_server_name>": {
+    "octocat-hp-mcp-server-docker": {
       "command": "docker",
-      "args": ["run", "-i", "--rm", "--env-file=.env", "<your_server_name>"]
+      "args": ["run", "-i", "--rm", "--env-file=.env", "octocat-hp-mcp-server"]
     }
   }
 }
@@ -148,6 +148,14 @@ To run the server with Server-Sent Events (SSE) support, use the `--sse` flag:
 ```sh
 node mcpServer.js --sse
 ```
+
+**To run with SSE in Docker and expose on port 9000:**
+
+```sh
+docker run  -i --rm  -p 9000:3001 --env-file .env octocat-hp-mcp-server node mcpServer.js --sse
+```
+
+This will start the server in the background, mapping port 9000 on your host to port 3000 in the container, and enable SSE support.
 
 ## 🐳 Dockerfile (Included)
 
