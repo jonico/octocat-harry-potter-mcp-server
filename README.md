@@ -28,7 +28,7 @@ Run from your project's root directory:
 npm install
 ```
 
-### 🔐 Set tool environment variables
+### 🔐 Set tool environment variables (not needed for octocat and harry potter api)
 
 In the `.env` file, you'll see environment variable placeholders, one for each workspace that the selected tools are from. For example, if you selected requests from 2 workspaces, e.g. Acme and Widgets, you'll see two placeholders:
 
@@ -59,14 +59,39 @@ Example:
 ```
 Available Tools:
 
-Workspace: acme-workspace
-  Collection: useful-api
-    list_all_customers
-      Description: Retrieve a list of useful things.
+Workspace: 6-harry-potter-api-with-magic-visualizations
+  Collection: hogwarts-staff.js
+    get_hogwarts_staff
+      Description: Retrieve all Hogwarts staff characters.
       Parameters:
-        - magic: The required magic power
-        - limit: Number of results returned
-        [...additional parameters...]
+
+  Collection: spells.js
+    fetch_spells
+      Description: Fetch spells from the Harry Potter API.
+      Parameters:
+
+  Collection: hogwarts-students.js
+    get_hogwarts_students
+      Description: Fetch all Hogwarts students from the Harry Potter API.
+      Parameters:
+
+  Collection: characters-in-house.js
+    get_characters_in_house
+      Description: Retrieve characters from a specific Hogwarts house.
+      Parameters:
+        - house: The name of the Hogwarts house to retrieve characters from.
+
+  Collection: all-characters.js
+    get_all_characters
+      Description: Retrieve all characters from the Harry Potter API.
+      Parameters:
+
+
+Workspace: 7-git-hub-octodex-postbot
+  Collection: build-your-own-octodex-api.js
+    fetch_octocats
+      Description: Fetch Octocats from the Octodex API.
+      Parameters:
 ```
 
 ## 🌐 Running the MCP Server
@@ -155,7 +180,7 @@ node mcpServer.js --sse
 docker run  -i --rm  -p 9000:3001 --env-file .env octocat-hp-mcp-server node mcpServer.js --sse
 ```
 
-This will start the server in the background, mapping port 9000 on your host to port 3000 in the container, and enable SSE support.
+This will start the server in the background, mapping port 9000 on your host to port 3001 in the container, and enable SSE support.
 
 ## 🐳 Dockerfile (Included)
 
