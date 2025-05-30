@@ -4,7 +4,7 @@
  * @returns {Promise<Object>} - The list of Hogwarts staff characters.
  */
 const executeFunction = async () => {
-  const baseUrl = 'https://harry-potter-api-3a23c827ee69.herokuapp.com';
+  const baseUrl = 'https://hp-api.onrender.com';
   try {
     // Construct the URL for the request
     const url = `${baseUrl}/api/characters/staff`;

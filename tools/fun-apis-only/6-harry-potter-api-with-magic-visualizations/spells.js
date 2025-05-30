@@ -4,7 +4,7 @@
  * @returns {Promise<Object>} - The list of spells from the API.
  */
 const executeFunction = async () => {
-  const baseUrl = 'https://harry-potter-api-3a23c827ee69.herokuapp.com'; // or use other base URLs as needed
+  const baseUrl = 'https://hp-api.onrender.com'; // updated base URL
   const token = process.env.FUN_APIS_ONLY_API_KEY;
   try {
     // Construct the URL for fetching spells

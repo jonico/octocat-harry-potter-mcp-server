@@ -6,7 +6,7 @@
  * @returns {Promise<Object>} - The list of characters in the specified house.
  */
 const executeFunction = async ({ house }) => {
-  const baseUrl = 'https://harry-potter-api-3a23c827ee69.herokuapp.com';
+  const baseUrl = 'https://hp-api.onrender.com';
   const token = process.env.FUN_APIS_ONLY_API_KEY;
   try {
     // Construct the URL for the request
