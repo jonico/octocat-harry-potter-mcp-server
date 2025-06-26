@@ -98,18 +98,6 @@ Workspace: 7-git-hub-octodex-postbot
 
 The MCP Server (`mcpServer.js`) exposes your automated API tools to MCP-compatible clients, such as Claude Desktop or the Postman Desktop Application.
 
-### A) 🖥️ Run with Postman
-
-The Postman Desktop Application is the easiest way to run and test MCP servers.
-
-Step 1: Download the latest Postman Desktop Application from [https://www.postman.com/downloads/](https://www.postman.com/downloads/).
-
-Step 2: Read out the documentation article [here](https://learning.postman.com/docs/postman-ai-agent-builder/mcp-requests/overview/) for the next steps.
-
-### B) 👩‍💻 Run with Claude Desktop
-
-To integrate with Claude Desktop:
-
 1. Find node path:
 
 ```sh
@@ -122,7 +110,27 @@ which node
 realpath mcpServer.js
 ```
 
-3. Open Claude Desktop → **Settings** → **Developers** → **Edit Config** and add your server:
+### A) 🖥️ Run with Postman
+
+The Postman Desktop Application is the easiest way to run and test MCP servers.
+
+Step 1: Download the latest Postman Desktop Application from [https://www.postman.com/downloads/](https://www.postman.com/downloads/).
+
+Step 2: Read out the documentation article [here](https://learning.postman.com/docs/postman-ai-agent-builder/mcp-requests/overview/) for the next steps.
+
+OR
+
+Fork the `Octodex-HP-MCP Server` Postman Collection from [here](https://www.postman.com/postman/fun-apis-only/collection/6832260ff71692b64e70f283?action=share&source=copy-link&creator=24435735) and adjust the `Octodex & HP Local Node` server settings to point to your local MCP server:
+
+![Image](postman-mcp-server-local-node.png)
+
+
+### B) 👩‍💻 Run with Claude Desktop
+
+To integrate with Claude Desktop:
+
+
+Open Claude Desktop → **Settings** → **Developers** → **Edit Config** and add your server:
 
 ```json
 {
@@ -130,6 +138,19 @@ realpath mcpServer.js
     "octocat-hp-mcp-server-local": {
       "command": "<absolute_path_to_node>",
       "args": ["<absolute_path_to_mcpServer.js>"]
+    }
+  }
+}
+```
+
+e.g.
+
+```json
+{
+  "mcpServers": {
+    "octocat-hp-mcp-server-local": {
+      "command": "/usr/local/bin/node",
+      "args": ["/Users/yourusername/octocat-harry-potter-mcp-server/mcpServer.js"]
     }
   }
 }
