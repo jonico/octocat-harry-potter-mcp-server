@@ -110,22 +110,18 @@ which node
 realpath mcpServer.js
 ```
 
-### A) 🖥️ Run with Postman
+#### A) 🖥️ Run with Postman
 
 The Postman Desktop Application is the easiest way to run and test MCP servers.
 
-Step 1: Download the latest Postman Desktop Application from [https://www.postman.com/downloads/](https://www.postman.com/downloads/).
+Step 1: Download the latest Postman Desktop Application from [https://www.postman.com/downloads/](https://www.postman.com/downloads/) or install the latest Postman Desktop Agent to work with Postman in your browser.
 
-Step 2: Read out the documentation article [here](https://learning.postman.com/docs/postman-ai-agent-builder/mcp-requests/overview/) for the next steps.
-
-OR
-
-Fork the `Octodex-HP-MCP Server` Postman Collection from [here](https://www.postman.com/postman/fun-apis-only/collection/6832260ff71692b64e70f283?action=share&source=copy-link&creator=24435735) and adjust the `Octodex & HP Local Node` server settings to point to your local MCP server:
+Step 2: Fork or modify the `Octodex-HP-MCP Server` Postman Collection from [here](https://www.postman.com/postman/fun-apis-only/collection/6832260ff71692b64e70f283?action=share&source=copy-link&creator=24435735) and adjust the `Octodex & HP Local Node` server settings to point to your local MCP server:
 
 ![Image](postman-mcp-server-local-node.png)
 
 
-### B) 👩‍💻 Run with Claude Desktop
+#### B) 👩‍💻 Run with Claude Desktop
 
 To integrate with Claude Desktop:
 
@@ -157,6 +153,12 @@ e.g.
 ```
 
 Restart Claude Desktop to activate this change.
+
+#### C) 🏃‍♂️ Run MCP Server in VSCode
+
+In order to run the MCP server in VSCode, you can adapt the [workspace MCP configuration](.vscode/mcp.json) in the .vscode folder.
+
+If you then select Agent mode in Co-Pilot Chat, the tools icon should should show API endpoints (tools) exposed by the `octocat-hp-mcp-server-local` server.
 
 ### Additional Options
 

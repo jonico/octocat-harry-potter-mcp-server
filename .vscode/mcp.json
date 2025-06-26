@@ -1,10 +1,10 @@
 {
     "servers": {
-        "octocat hp": {
+        "octocat-hp-mcp-server-local": {
             "type": "stdio",
             "command": "node",
             "args": [
-                "/Users/johannesnicolai/Documents/octocat-harry-potter-mcp-server/mcpServer.js"
+                "/Users/username/octocat-harry-potter-mcp-server/mcpServer.js"
             ]
         }
     }
