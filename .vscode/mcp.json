@@ -1,0 +1,11 @@
+{
+    "servers": {
+        "octocat hp": {
+            "type": "stdio",
+            "command": "node",
+            "args": [
+                "/Users/johannesnicolai/Documents/octocat-harry-potter-mcp-server/mcpServer.js"
+            ]
+        }
+    }
+}
