@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter & Octocat Matcher</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; padding: 20px; color: white; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { text-align: center; font-size: 2.5em; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .matches { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .match-card { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .match-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        .match-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .hp-info { flex: 1; }
+        .hp-name { font-size: 1.3em; font-weight: bold; margin-bottom: 5px; }
+        .hp-house { font-size: 0.9em; opacity: 0.8; }
+        .hp-image { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.3); }
+        .match-arrow { text-align: center; font-size: 2em; margin: 10px 0; }
+        .octocat-section { text-align: center; }
+        .octocat-image { width: 120px; height: 120px; object-fit: contain; margin: 0 auto 10px; display: block; border-radius: 10px; background: rgba(255,255,255,0.1); padding: 10px; }
+        .octocat-name { font-size: 1.2em; font-weight: bold; margin-bottom: 10px; }
+        .reason { font-size: 0.9em; opacity: 0.9; line-height: 1.4; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; }
+        .controls { text-align: center; margin-bottom: 30px; }
+        button { background: rgba(255,255,255,0.2); border: none; color: white; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-size: 1em; margin: 5px; transition: all 0.3s ease; }
+        button:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
+        .gryffindor { border-left: 5px solid #740001; }
+        .slytherin { border-left: 5px solid #0d4a0d; }
+        .house-badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 0.8em; font-weight: bold; }
+        .gryffindor .house-badge { background: #740001; }
+        .slytherin .house-badge { background: #0d4a0d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Harry Potter & Octocat Magical Matches 🐙</h1>
+        
+        <div class="controls">
+            <button onclick="generateMatches()">Generate New Matches</button>
+            <button onclick="filterHouse('all')">All Houses</button>
+            <button onclick="filterHouse('Gryffindor')">Gryffindor Only</button>
+            <button onclick="filterHouse('Slytherin')">Slytherin Only</button>
+        </div>
+        
+        <div class="matches" id="matches"></div>
+    </div>
+
+    <script>
+        const hpCharacters = [
+            {name: "Harry Potter", house: "Gryffindor", image: "https://ik.imagekit.io/hpapi/harry.jpg", traits: ["brave", "hero", "lightning", "magical", "leader"]},
+            {name: "Hermione Granger", house: "Gryffindor", image: "https://ik.imagekit.io/hpapi/hermione.jpeg", traits: ["smart", "studious", "books", "analytical", "brilliant"]},
+            {name: "Ron Weasley", house: "Gryffindor", image: "https://ik.imagekit.io/hpapi/ron.jpg", traits: ["loyal", "funny", "chess", "friend", "brave"]},
+            {name: "Draco Malfoy", house: "Slytherin", image: "https://ik.imagekit.io/hpapi/draco.jpg", traits: ["cunning", "wealthy", "rival", "ambitious", "complex"]},
+            {name: "Severus Snape", house: "Slytherin", image: "https://ik.imagekit.io/hpapi/snape.jpg", traits: ["mysterious", "dark", "complex", "teacher", "protective"]},
+            {name: "Albus Dumbledore", house: "Gryffindor", image: "", traits: ["wise", "powerful", "leader", "magical", "mentor"]},
+            {name: "Lord Voldemort", house: "Slytherin", image: "https://ik.imagekit.io/hpapi/voldemort.jpg", traits: ["dark", "evil", "powerful", "serpent", "villain"]},
+            {name: "Sirius Black", house: "Gryffindor", image: "https://ik.imagekit.io/hpapi/sirius.JPG", traits: ["rebel", "motorcycle", "dog", "prisoner", "free-spirit"]},
+            {name: "Remus Lupin", house: "Gryffindor", image: "https://ik.imagekit.io/hpapi/lupin.jpg", traits: ["teacher", "wise", "werewolf", "gentle", "caring"]},
+            {name: "Ginny Weasley", house: "Gryffindor", image: "https://ik.imagekit.io/hpapi/ginny.jpg", traits: ["fierce", "independent", "brave", "strong", "athletic"]},
+            {name: "Neville Longbottom", house: "Gryffindor", image: "https://ik.imagekit.io/hpapi/neville.jpg", traits: ["brave", "plants", "growth", "heroic", "determined"]},
+            {name: "Bellatrix Lestrange", house: "Slytherin", image: "https://ik.imagekit.io/hpapi/bellatrix.jpg", traits: ["crazy", "dangerous", "dark", "chaotic", "evil"]}
+        ];
+
+        const octocats = [
+            {name: "Spocktocat", image: "https://octodex.github.com/images/spocktocat.png", traits: ["logical", "smart", "analytical", "space"]},
+            {name: "Stormtroopocat", image: "https://octodex.github.com/images/stormtroopocat.png", traits: ["dark", "evil", "army", "helmet"]},
+            {name: "Gracehoppertocat", image: "https://octodex.github.com/images/gracehoppertocat.jpg", traits: ["smart", "coding", "analytical", "brilliant"]},
+            {name: "Jetpacktocat", image: "https://octodex.github.com/images/jetpacktocat.png", traits: ["flying", "adventure", "hero", "brave"]},
+            {name: "Dr.Octocat", image: "https://octodex.github.com/images/droctocat.png", traits: ["smart", "medical", "wise", "teacher"]},
+            {name: "Yaktocat", image: "https://octodex.github.com/images/yaktocat.png", traits: ["funny", "hairy", "loyal", "friend"]},
+            {name: "Defunktocat", image: "https://octodex.github.com/images/defunktocat.png", traits: ["mysterious", "dark", "complex", "cool"]},
+            {name: "Bear Cavalry", image: "https://octodex.github.com/images/bear-cavalry.png", traits: ["fierce", "warrior", "strong", "brave"]},
+            {name: "Grinchtocat", image: "https://octodex.github.com/images/grinchtocat.gif", traits: ["green", "villain", "mischievous", "cunning"]},
+            {name: "Momtocat", image: "https://octodex.github.com/images/momtocat.png", traits: ["caring", "protective", "nurturing", "gentle"]},
+            {name: "Adventure Cat", image: "https://octodex.github.com/images/adventure-cat.png", traits: ["brave", "explorer", "heroic", "adventure"]},
+            {name: "Mummytocat", image: "https://octodex.github.com/images/mummytocat.gif", traits: ["dark", "ancient", "mysterious", "wrapped"]},
+            {name: "Femalecodertocat", image: "https://octodex.github.com/images/femalecodertocat.png", traits: ["smart", "coding", "independent", "strong"]},
+            {name: "Dinotocat", image: "https://octodex.github.com/images/dinotocat.png", traits: ["fierce", "ancient", "powerful", "strong"]},
+            {name: "Heisencat", image: "https://octodex.github.com/images/heisencat.png", traits: ["mysterious", "chemistry", "dark", "complex"]},
+            {name: "Robotocat", image: "https://octodex.github.com/images/Robotocat.png", traits: ["mechanical", "logical", "analytical", "precise"]},
+            {name: "Bewitchedtocat", image: "https://octodex.github.com/images/bewitchedtocat.jpg", traits: ["magical", "witch", "mystical", "enchanted"]},
+            {name: "Yogitocat", image: "https://octodex.github.com/images/yogitocat.png", traits: ["peaceful", "wise", "calm", "centered"]},
+            {name: "Labtocat", image: "https://octodex.github.com/images/labtocat.png", traits: ["loyal", "friendly", "companion", "faithful"]},
+            {name: "Blacktocats", image: "https://octodx.github.com/images/blacktocats.png", traits: ["rebellious", "strong", "independent", "fierce"]}
+        ];
+
+        function calculateMatch(hpChar, octocat) {
+            const commonTraits = hpChar.traits.filter(trait => 
+                octocat.traits.some(oTrait => 
+                    trait === oTrait || 
+                    (trait === "intelligent" && oTrait === "smart") ||
+                    (trait === "brave" && oTrait === "heroic") ||
+                    (trait === "clever" && oTrait === "smart")
+                )
+            );
+            return commonTraits.length + Math.random() * 0.5; // Add slight randomness
+        }
+
+        function getMatchReason(hpChar, octocat, score) {
+            const reasons = [
+                `Both share ${hpChar.traits.join(', ')} qualities`,
+                `Perfect match based on their ${octocat.traits[0]} nature`,
+                `Their ${hpChar.house} spirit aligns with this Octocat's energy`,
+                `Similar personality traits make them magical companions`,
+                `Both embody the essence of ${hpChar.traits[0]} characters`
+            ];
+            return reasons[Math.floor(Math.random() * reasons.length)];
+        }
+
+        let allMatches = [];
+        let currentFilter = 'all';
+
+        function generateMatches() {
+            allMatches = [];
+            const usedOctocats = new Set();
+            
+            hpCharacters.forEach(hpChar => {
+                const availableOctocats = octocats.filter(oct => !usedOctocats.has(oct.name));
+                const scored = availableOctocats.map(oct => ({
+                    ...oct,
+                    score: calculateMatch(hpChar, oct)
+                })).sort((a, b) => b.score - a.score);
+                
+                const bestMatch = scored[0];
+                if (bestMatch) {
+                    usedOctocats.add(bestMatch.name);
+                    allMatches.push({
+                        hp: hpChar,
+                        octocat: bestMatch,
+                        reason: getMatchReason(hpChar, bestMatch, bestMatch.score)
+                    });
+                }
+            });
+            
+            displayMatches();
+        }
+
+        function filterHouse(house) {
+            currentFilter = house;
+            displayMatches();
+        }
+
+        function displayMatches() {
+            const filtered = currentFilter === 'all' ? 
+                allMatches : 
+                allMatches.filter(match => match.hp.house === currentFilter);
+            
+            document.getElementById('matches').innerHTML = filtered.map(match => `
+                <div class="match-card ${match.hp.house.toLowerCase()}">
+                    <div class="match-header">
+                        <div class="hp-info">
+                            <div class="hp-name">${match.hp.name}</div>
+                            <div class="hp-house">
+                                <span class="house-badge">${match.hp.house}</span>
+                            </div>
+                        </div>
+                        ${match.hp.image ? `<img src="${match.hp.image}" alt="${match.hp.name}" class="hp-image" onerror="this.style.display='none'">` : ''}
+                    </div>
+                    
+                    <div class="match-arrow">⚡ ↔️ 🐙</div>
+                    
+                    <div class="octocat-section">
+                        <img src="${match.octocat.image}" alt="${match.octocat.name}" class="octocat-image" onerror="this.style.display='none'">
+                        <div class="octocat-name">${match.octocat.name}</div>
+                        <div class="reason">${match.reason}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Generate initial matches
+        generateMatches();
+    </script>
+</body>
+</html>
