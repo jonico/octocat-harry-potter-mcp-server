@@ -134,7 +134,7 @@ async function run() {
       }
     });
 
-    const port = process.env.PORT || 3001;
+    const port = process.env.PORT || 9000;
     app.listen(port, () => {
       console.log(`[SSE Server] running on port ${port}`);
     });

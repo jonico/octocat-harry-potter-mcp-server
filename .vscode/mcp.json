@@ -4,7 +4,7 @@
             "type": "stdio",
             "command": "node",
             "args": [
-                "/Users/username/octocat-harry-potter-mcp-server/mcpServer.js"
+                "/Users/johannesnicolai/octocat-harry-potter-mcp-server/mcpServer.js"
             ]
         },
         "octocat-hp-mcp-server-docker": {
@@ -18,6 +18,9 @@
                 ".env",
                 "octocat-hp-mcp-server"
             ]
+        },
+        "octocat-hp-mcp-server-sse": {
+            "url": "http://localhost:9000/sse"
         }
     }
 }

@@ -213,10 +213,10 @@ node mcpServer.js --sse
 **To run with SSE in Docker and expose on port 9000:**
 
 ```sh
-docker run  -i --rm  -p 9000:3001 --env-file .env octocat-hp-mcp-server node mcpServer.js --sse
+docker run  -i --rm  -p 9000:9000 --env-file .env octocat-hp-mcp-server node mcpServer.js --sse
 ```
 
-This will start the server in the background, mapping port 9000 on your host to port 3001 in the container, and enable SSE support.
+This will start the server in the background, mapping port 9000 on your host to port 9000 in the container, and enable SSE support.
 
 ## 🐳 Dockerfile (Included)
 
