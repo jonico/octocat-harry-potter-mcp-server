@@ -156,7 +156,7 @@ Restart Claude Desktop to activate this change.
 
 #### C) 🏃‍♂️ Run MCP Server in VSCode
 
-In order to run the MCP server in VSCode, you can adapt the [workspace MCP configuration](.vscode/mcp.json) in the .vscode folder.
+In order to run the local MCP server in VSCode, you can adapt and start the [octocat-hp-mcp-server-local](.vscode/mcp.json) server in the .vscode folder.
 
 If you then select Agent mode in Co-Pilot Chat, the tools icon should should show API endpoints (tools) exposed by the `octocat-hp-mcp-server-local` server.
 
@@ -170,6 +170,14 @@ For production deployments, you can use Docker:
 
 ```sh
 docker build -t octocat-hp-mcp-server .
+```
+
+Add your environment variables (API keys, etc.) inside the `.env` file.
+
+Test it locally:
+
+```sh
+docker run -i --rm --env-file .env octocat-hp-mcp-server
 ```
 
 **2. Claude Desktop Integration**
@@ -187,7 +195,12 @@ Add Docker server configuration to Claude Desktop (Settings → Developers → E
 }
 ```
 
-> Add your environment variables (API keys, etc.) inside the `.env` file.
+**3. VS Code Integration**
+
+In order to run the Docker MCP server in VSCode, you can adapt and start the [octocat-hp-mcp-server-docker](.vscode/mcp.json) server in the .vscode folder.
+
+If you then select Agent mode in Co-Pilot Chat, the tools icon should should show API endpoints (tools) exposed by the `octocat-hp-mcp-server-docker` server.
+
 
 #### 🌐 Server-Sent Events (SSE)
 

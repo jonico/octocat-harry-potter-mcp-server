@@ -6,6 +6,18 @@
             "args": [
                 "/Users/username/octocat-harry-potter-mcp-server/mcpServer.js"
             ]
+        },
+        "octocat-hp-mcp-server-docker": {
+            "type": "stdio",
+            "command": "docker",
+            "args": [
+                "run",
+                "-i",
+                "--rm",
+                "--env-file",
+                ".env",
+                "octocat-hp-mcp-server"
+            ]
         }
     }
 }
