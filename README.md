@@ -243,6 +243,13 @@ Extend your agent with more tools easily:
 3. Copy new generated tool(s) into your existing project's `tools/` folder.
 4. Update your `tools/paths.js` file to include new tool references.
 
+## Example prompts and visualizations
+
+[prompts.md](prompts.md) has some example prompts how to test the capabilities of the MCP server, which lead to [visualizations](hp_octocat_matcher.html) like this
+
+![image](https://github.com/user-attachments/assets/cd7c74f7-3fcf-4ccf-89f5-e0f9f65cfed3)
+
+
 ## 💬 Questions & Support
 
 Visit the [Postman Agent Generator](https://postman.com/explore/agent-generator) page for updates and new capabilities.
