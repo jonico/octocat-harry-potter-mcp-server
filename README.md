@@ -1,3 +1,7 @@
+# Workshop slides:
+https://drive.google.com/drive/folders/1CQaKkrcuD8Vxam559EEdCByX0z2s-Oxc?usp=sharing
+
+
 # Postman Agent Generator
 
 Welcome to your generated agent! 🚀
