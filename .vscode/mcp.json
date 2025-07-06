@@ -1,5 +1,8 @@
 {
     "servers": {
+        "octocat-hp-mcp-server-heroku": {
+            "url": "https://octocat-hp-mcp-server-d432a79c768c.herokuapp.com/sse"
+        },
         "octocat-hp-mcp-server-local": {
             "type": "stdio",
             "command": "node",
@@ -21,6 +24,12 @@
         },
         "octocat-hp-mcp-server-sse": {
             "url": "http://localhost:9000/sse"
-        }
+        },
+        "advanced-postman-mcp-server-sse": {
+            "url": "http://localhost:3001/sse"
+        },
+        "advanced-postman-mcp-server-heroku": {
+            "url": "https://postman-mcp-server-31647e95c708.herokuapp.com/sse"
+        },
     }
 }
